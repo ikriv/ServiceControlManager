@@ -1,0 +1,375 @@
+<html>
+
+<head>
+<content="text/html; charset=iso-8859-1">
+<title>Service Control Manager</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1> <font color="#0000FF"> <b> <i> <center>
+	Service Control Manager
+</h1> </font> </b> </i> </center>
+
+<center> <i>
+	for Windows NT
+</center> </i>
+<p>
+<center>
+	Copyright (C) 1999 <a href="mailto:ivan@cmt.co.il">Ivan Krivyakov</a>
+</center>
+<hr>
+
+<font color="#0000FF"><h2> Introduction </h2></font>
+
+<i>Service Control Manager</i> is a program that gives you full control
+over services installed on your computer, and on remote computers
+as well. 
+<p>
+
+Using this tool you can
+<ul>
+	<li> Install and uninstall services.
+	<li> Start, stop and pause services.
+	<li> View list of all installed services and their properties.
+	<li> Change service properties.
+	<li> <font color="#FF0000">Do all of the above on REMOTE computer!</font>
+</ul>
+
+The only difference between local and remote operations is speed:
+remote operations are usually slower than local ones.
+<p>
+
+<u>A word about drivers</u>
+<p>
+
+Here and below "<i>services</i>" means both drivers and services. 
+Although this may be a bit confusing in the beginning, such abbreviation
+helps to avoid infinitely repeating phrase "drivers and services".
+
+<font color="#0000FF"><h2> Starting Service Control Manager </h2></font>
+
+To start Service Control Manager, simply double-click on Service Control Manager 
+executable file (<i>ServiceControl.exe</i>). When started, Service Control Manager
+displays list of services installed on local computer and their properties.
+Since there are so many properties, not all of them are displayed by default. 
+You may change the set of displayed properties using <code>View->Columns</code> 
+menu.
+<p>
+
+The list of services is sortable - click on column header to sort the list
+by that column. Click again to reverse sort order. When you start the program,
+services are sorted by the first column (usually this is "internal name").
+<p>
+
+<font color="#0000FF"><h2> Starting and Stopping Services </h2></font>
+
+Using toolbar buttons and/or items from <code>Services</code> menu,
+you can attempt to start, stop, pause or resume any service. 
+Of course, trying to start a service that is already running, or to stop
+the service that is not running, usually causes an error.
+Also, most services don't support pausing and resuming.  
+If operation fails, Service Control Manager displays an error message 
+that describes the reason of the failure:<br><br>
+<img src="svc_error.gif">
+<p>
+
+<font color="#0000FF"><h2> Properties of Services </h2></font>
+
+Service Control Manager can display the following properties of services:
+<ul>
+    <li><a HREF="#Prop_Account">        Account</a>
+    <li><a HREF="#Prop_Depends_On">     Depends On</a>
+    <li><a HREF="#Prop_Driver_Object">  Driver Object</a>
+    <li><a HREF="#Prop_Error_Control">  Error Control</a>
+    <li><a HREF="#Prop_Interactive">    Interactive</a>
+    <li><a HREF="#Prop_Internal_Name">  Internal Name</a>
+    <li><a HREF="#Prop_Load_Group">     Load Group</a>
+    <li><a HREF="#Prop_Name">           Name</a>
+    <li><a HREF="#Prop_Tag_ID">         Tag ID</a>
+    <li><a HREF="#Prop_Type">           Type</a>
+    <li><a HREF="#Prop_TypeEx">         TypeEx</a>
+    <li><a HREF="#Prop_Startup">        Startup</a>
+    <li><a HREF="#Prop_State">          State</a>
+    <li><a HREF="#Prop_Path">           Path</a>
+</ul>
+<p>
+
+<b><a NAME="Prop_Account">Account</a></b><br>
+For services (but not drivers) this field contains a name of user account 
+of the service. This may be either real user account or <code>LocalSystem</code> 
+account. <code>LocalSystem</code> account has administrator rights on local 
+computer but it is not recognized by remote computers, and thus cannot make
+network connections. Most services operate in <code>LocalSystem</code> account.
+<p>
+
+<b><a NAME="Prop_Depends_On">Depends On</a></b><br>
+This field contains a list of services and/or service groups that given service
+depends on. If service A depends on service B, service A can work only if
+service B is running. When user requests to start service A, operating system 
+checks the state of service B. If service B is running, operating system attempts
+to start service A. If service B is not running, operating system attempts to
+start service B first. If service B cannot be started, the whole operation fails
+(without attempt to actually start service A). If service B has been started 
+successfully, operating system attempts to start service A.
+<p>
+
+If service A depends on group G of services, at least one of members of
+G must be running before A can work. Group names are prefixed with '+' 
+sign in dependencies list.
+<p>
+
+<b><a NAME="Prop_Driver_Object">Driver Object</a></b><br>
+This field contains a name of the driver object used by operating system when
+it loads given device driver. This field has no meaning for services. Usually,
+this field is empty, that means that operating system will use a default 
+object name created by the I/O system.
+<p>
+
+<b><a NAME="Prop_Error_Control">Error Control</a></b><br>
+This field specifies the severity of the error if this service fails to start
+during Windows NT startup, and determines the action taken by the startup program 
+if failure occurs. This field can have on of the following values:
+<ul>
+	<li> <i>Ignore</i> - log the error in event log and continue Windows NT startup.
+	<li> <i>Normal</i> - log the error in event log, display warning message 
+             "At least one service failed..." and continue Windows NT startup.
+        <li> <i>Severe</i> - log the error in event log. If the last-known-good configuration is 
+             being started, the startup operation continues. Otherwise, the system 
+             is restarted with the last-known-good configuration.
+	<li> <i>Critical</i> - the startup program logs the error, if possible. If 
+             the last-known-good configuration is being started, the startup operation 
+             fails. Otherwise, the system is restarted with the last-known good 
+             configuration.
+</ul>
+Most services have error control of <i>Ignore</i> or <i>Normal</i>.
+<p>
+
+<b><a NAME="Prop_Interactive">Interactive</a></b><br>
+This field defines whether service can interact with GUI desktop or not. Only
+services are able to interact with the desktop - drivers don't have this capability.
+<p>
+
+<b><a NAME="Prop_Internal_Name">Internal name</a></b><br>
+is a name used by Windows NT programs to refer to the services.
+The program must know internal name of the services in order to perform actions
+on the service. The maximum length of internal name is 256 characters. 
+The service control manager database preserves the case of the characters, 
+but service name comparisons are always case insensitive. Internal name 
+cannot contain forward slash (/) and back slash (\) characters (but can 
+contain spaces). All services must have internal name. 
+Internal name cannot be empty.
+<p>
+
+<b><a NAME="Prop_Load_Group">Load Group</a></b><br>
+or <i>group</i>. This field specifies what group given service belongs to.
+A service can belong to at most one group. This field is empty if the
+service does not belong to any group. Groups are used to organize service
+dependencies (see <a HREF="#Prop_Depends_On">Depends On</a> field) and to define 
+the order in which services are started during early phases of system boot.
+<p>
+
+<b><a NAME="Prop_Name">Name</a></b><br>
+or <i>display name</i> is a name used in user-interface programs (e.g. in
+control panel) to present the service to the user. Each service must have 
+display name. Display name cannot be empty.
+<p>
+
+<b><a NAME="Prop_Tag_ID">Tag ID</a></b><br>
+This field defines an order in which given service will be loaded within
+its group. Tag IDs are evaluated only for service with Boot and System 
+startup. This field is empty for most services.
+<p>
+
+<b><a NAME="Prop_Type">Type</a></b><br>
+The type is either <i>service</i> or <i>driver</i>. Of course, each service
+must have a type.
+<p>
+
+<b><a NAME="Prop_TypeEx">TypeEx</a></b><br>
+This field contains extended service type information. For drivers, this field
+may contain a string <i>"FS"</i> that stands for "file system driver". 
+For services this field may contain a string <i>"Shared"</i> that means 
+that this service shares its EXE file with other services. 
+This field is empty in most cases.
+<p>
+
+<b><a NAME="Prop_Startup">Startup</a></b><br>
+property defines when the service is started.
+Windows NT defines the following values for this field:
+<ul>
+	<li><i>Boot</i> - the service is critical for system boot. The code of the
+            service is loaded to computer memory by the OS loader in the earliest 
+            phase of system boot process. Only drivers  can have Boot startup.
+            Drivers that have Boot startup cannot be stopped.
+        <li><i>System</i> - the service is loaded automatically during system boot
+            process. Only drivers can have System startup.
+        <li><i>Auto</i> - the service is loaded automatically by the system when
+            boot process is finished. Both services and drivers can have Auto startup.
+        <li><i>Manual</i> - the service can be started on demand. The demand may come
+            from user, application program or other service that depends on this service.
+            Both services and drivers can have Manual startup.
+        <li><i>Disabled</i> - the service cannot be started.
+            Both services and drivers can have Disabled startup.
+</ul>
+For some reason, file system drivers in Windows NT have <i>disabled</i> startup,
+although they are started during system boot process and run all the time the
+system is up.
+<p>
+
+See Windows NT Magazine article <i>Inside the Boot Process</i>
+<a HREF="http://www.winntmag.com/Magazine/Article.cfm?IssueID=62&ArticleID=3952">Part I</a> 
+and
+<a HREF="http://www.winntmag.com/Magazine/Article.cfm?ArticleID=4711">Part II</a>
+by 
+<a HREF="www.sysinternals.com"> Mark Russinovich </a> 
+for detailed description of Windows NT boot process.
+<p>
+
+<b><a NAME="Prop_State">State</a></b><br>
+is a current state of the service. Each service has state, and service state can 
+change from time to time. Windows NT defines the following states:
+<ul>
+	<li><i>Stopped</i> - service is not running. In this case Service Control
+            Manager displays empty string in the <code>State</code> field.
+        <li><i>Starting...</i> - service is starting up.
+        <li><i>Running</i> - service is running
+	<li><i>Stopping...</i> - service is going to stop
+        <li><i>Pause pending...</i> - service accepted pause request and is going to pause
+        <li><i>Paused</i> - service is paused
+        <li><i>Continue pending...</i> - service accepted continue request and is moving towards running state
+</ul>
+<p>
+
+<b><a NAME="Prop_Path">Path</a></b><br>
+is a path to service's executable file. Some system services have empty path.
+<p>
+
+<font color="#0000FF"><h2> Adding New Service </h2></font>
+To add a new service choose <code>Service->Add</code> menu item or simply press INS button.
+You will be prompted to enter the following properties of your service:
+
+<ul>
+    <li><i><a HREF="#Prop_Internal_Name">Service Name<a></i> -  internal name of your service. 
+        This attribute is required.
+
+    <li><i><a HREF="#Prop_Name">Display Name</a></i> - service name for display in user programs. 
+        This attribute is required.
+
+    <li><i><a HREF="#Prop_Load_Group">Group</a></i> - service's load group</a>. 
+        This attribute may be left empty.
+
+    <li><i><a HREF="#Prop_Depend_On">Depends on</a></i> - list of service's dependencies. 
+        Use semicolon (;) to separate items in the list. Group names must be prefixed with '+' sign. 
+        Example of dependency list: <code>+SCSI Miniport;ParPort;+Extended Base</code>. 
+        Dependency list may be left empty.
+
+    <li><i><a HREF="#Prop_Path">Path</a> to the executable file</i> - this attribute is required.
+
+    <li><i>Service type</i> - this can be one of 
+        <ul>
+            <li>Service (own process)
+            <li>Service (shared process)
+            <li>Kernel-mode driver
+            <li>File System Driver
+        </ul>
+
+        Service type attribute is combination of <a HREF="#Prop_Type">Type</a> and 
+        <a HREF="#Prop_TypeEx">TypeEx</a> properties. This attribute is required.
+
+    <li><i><a HREF="#Prop_Interactive">Interactive</a></i> - specifies whether your service can interact with 
+        the desktop. This attribute is required.
+
+    <li><i><a HREF="#Prop_Startup">Startup</a></i> - service's startup. This attribute is required.
+    
+    <li><i><a HREF="#Prop_Startup">Error control</a></i> - service's error control
+
+    <li><i><a HREF="#Prop_Account">Account</a></i> or <i><a HREF="#Prop_Driver_Object">Driver Object</a></i> -
+        specifies account for services or driver object name for drivers. This attribute is not required. 
+        <code>LocalSystem</code> account will be used for the service if this attribute is omitted.
+
+    <li><i>Password</i> - this field is used to specify account's password. You don't need to specify
+        a password for <code>LocalSystem</code> account.
+</ul>
+Note, that Service Control Manager does not enforce the limitations dictated by Windows NT. For example,
+it will allow you to specify a service with <i>Boot</i> startup, or an interactive driver. Although,
+Windows NT (and then Service Control Manager) will report an error if you attempt to add such 
+a service to the system.
+<p>
+This is a deliberate decision, not a bug. Service Control Manager does not try to be too clever
+and enforce Microsoft's limitations, except for trivial ones. If some day Microsoft will allow 
+interactive drivers, Service Control Manager will not be affected by this change.
+<p>
+
+<font color="#0000FF"><h2> Configuring Existing Service </h2></font>
+Press Enter or double-click on a service in the list to configure the service. You may also use
+<code>Service->Configure</code> menu item.
+<p>
+Service configuration dialog will display the same service properties as "add service" dialog.
+In fact, this is the same dialog, but decorated a bit differently. You can change everything
+except for service's internal name. This is because changing service's internal name in fact
+means deleting this service and creating new service with different name.
+<p>
+
+<font color="#0000FF"><h2> Removing Existing Service </h2></font>
+Press DEL button or use <code>Service->Remove</code> menu item to permanently remove an existing 
+service from the system (after confirmation). If the service is running, the system will try to 
+stop it. If the service cannot be stopped, it will be marked for deletion and removed on next 
+system startup. If some processes have open handles to the service, the service will be removed 
+after all these handles are closed. If service is not running and there are no open handles to it, 
+the service will be removed (almost) immediately.
+<p>
+
+<font color="#0000FF"><h2> Connecting to Remote Computer </h2></font>
+Use <code>"File->Select Computer"</code> menu item to connect to remote 
+computer. You will be prompted for computer name.
+<p>
+Service Control Manager relies on Windows NT default mechanism for user name in password
+when making connection to remote computer. This mechanism works as follows: if you already 
+have an open connection to the computer in question, Windows NT will use user name and password
+used for that connection. If you don't have any open connections to the computer, Windows NT
+will use user name and password under which you are logged in to the local computer.
+<p>
+<u>Fooling Windows NT default logon mechanism</u>
+<p>
+If you don't like this mechanism, you may try to fool it as described below.<br>
+Open command interpreter (<code>cmd.exe</code>) and give it the following command:
+<p>
+<code>net use \\</code><i>computer_name</i><code>\ipc$ /user:</code><i>username</i><code> 
+</code><i>password</i>
+<p>
+Of course, you must specify real computer name, user name and password. If you have a
+Windows NT domain, user name may be in the form <code>domain\user</code>. NOTE: the direction
+of slashes (/ and \) is important!
+<p>
+If the command above has been executed successfully, it creates a connection to the remote
+computer with required user name and password. Windows NT will use specified user name
+and password for all subsequent connections to that computer.
+<p>
+Windows NT requires that all simultaneous connections to single remote computer
+to have the same user name and password (a.k.a. "credentials"). Therefore, the
+command above may fail if you already have a connection to the computer in question with
+different user name and password. Use <code>net use</code> command without parameters to
+see the list of existing connections. Use <code>net use <i>connection</i> /d</code> 
+to remove unwanted connections and repeat the procedure.
+<hr>
+
+<font color="#0000FF"><h2> Distribution and The Legal Stuff </h2></font>
+Service Control Manager is copyright (c) by <a href="mailto:ivan@cmt.co.il">Ivan Krivyakov</a>.
+<p>
+
+<font size="-1">
+The program is shipped "as is" without warranties of any kind, either explicit or implied,
+including but not limited to warranties of merchantability, fitness for any particular
+purpose, et cetera, et cetera. Under no circumstances shall Ivan Krivyakov, his employers, 
+his family members, his cat or any other creature associated with Ivan Krivyakov be liable
+for a damage, loss of profit or other unpleasant things that were caused by use or inability 
+to use Service Control Manager.
+</font>
+<p>
+
+Service Control Manager is distributed under terms of 
+<A HREF="GNU_Public_License.htm">GNU General Public license</A>.
+
+</body>
+</html>

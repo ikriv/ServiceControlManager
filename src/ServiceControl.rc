@@ -1,0 +1,399 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ServiceControl.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ServiceControl.ico"
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "Version 1.01, April 17, 1999\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Windows NT Service Control Manager (IVK)\0"
+            VALUE "FileVersion", "1.0\0"
+            VALUE "InternalName", "Service Control\0"
+            VALUE "LegalCopyright", "Copyright © 1999 by Ivan Krivyakov (IVK), ivan@cmt.co.il\0"
+            VALUE "OriginalFilename", "ServiceControl.exe\0"
+            VALUE "ProductName", "Windows NT Services Control Manager\0"
+            VALUE "ProductVersion", "1.01\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Select Computer...",         IDC_SELECT_COMPUTER
+    END
+    POPUP "&Service"
+    BEGIN
+        MENUITEM "&Start",                      IDC_SERVICE_START
+        MENUITEM "S&top",                       IDC_SERVICE_STOP
+        MENUITEM "&Pause",                      IDC_SERVICE_PAUSE
+        MENUITEM "&Continue",                   IDC_SERVICE_CONTINUE
+        MENUITEM SEPARATOR
+        MENUITEM "Con&figure... \tEnter",       IDC_SERVICE_CONFIGURE
+        MENUITEM "&Add...\tIns",                IDC_SERVICE_ADD
+        MENUITEM "&Remove\tDel",                IDC_SERVICE_REMOVE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Font...",                    IDC_OPTIONS_FONT
+        MENUITEM "&Columns...",                 IDC_OPTIONS_COLUMNS
+        MENUITEM SEPARATOR
+        MENUITEM "&Refresh\tF5",                IDC_REFRESH
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDC_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS DISCARDABLE 
+BEGIN
+    VK_DELETE,      IDC_SERVICE_REMOVE,     VIRTKEY, NOINVERT
+    VK_F5,          IDC_REFRESH,            VIRTKEY, NOINVERT
+    VK_INSERT,      IDC_SERVICE_ADD,        VIRTKEY, NOINVERT
+    VK_RETURN,      IDC_SERVICE_CONFIGURE,  VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_COLUMNS_DLG DIALOG DISCARDABLE  0, 0, 230, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Columns To Display"
+FONT 10, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,55,139,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,124,139,50,14
+    LISTBOX         IDC_DISPLAYED_LIST,7,19,89,110,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Displayed columns:",IDC_STATIC,7,6,70,9
+    LISTBOX         IDC_HIDDEN_LIST,134,19,89,110,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hidden columns:",IDC_STATIC,134,6,70,9
+    PUSHBUTTON      "Hide ->",IDC_HIDE,100,27,29,13
+    PUSHBUTTON      "<- Show",IDC_SHOW,100,46,29,13
+    PUSHBUTTON      "Up",IDC_UP,100,65,29,13
+    PUSHBUTTON      "Down",IDC_DOWN,100,84,29,13
+END
+
+IDD_COMPUTER_NAME_DLG DIALOG DISCARDABLE  0, 0, 217, 59
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Computer Name"
+FONT 10, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,46,38,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,122,38,50,14
+    LTEXT           "Enter computer name. Use empty string for local computer",
+                    IDC_STATIC,7,7,190,11
+    EDITTEXT        IDC_COMPUTER_NAME,7,17,203,12,ES_AUTOHSCROLL
+END
+
+IDD_CONFIG_SERVICE DIALOGEX 0, 0, 391, 230
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "The title is set dynamically"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_SERVICE_NAME,7,17,175,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DISPLAY_NAME,7,46,175,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GROUP,193,18,191,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEPENDENCIES,193,46,191,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EXE_PATH,7,75,377,14,ES_AUTOHSCROLL
+    CONTROL         "Service (own process)",IDC_TYPE_OWN,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,17,110,89,11
+    CONTROL         "Service (shared process)",IDC_TYPE_SHARED,"Button",
+                    BS_AUTORADIOBUTTON,17,126,98,11
+    CONTROL         "Kernel-mode driver",IDC_TYPE_DRIVER,"Button",
+                    BS_AUTORADIOBUTTON,17,142,89,11
+    CONTROL         "File system driver",IDC_TYPE_FILE_SYSTEM,"Button",
+                    BS_AUTORADIOBUTTON,17,158,89,11
+    CONTROL         "Interactive",IDC_TYPE_INTERACTIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,17,174,87,11
+    CONTROL         "Boot",IDC_START_BOOT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,132,110,57,11
+    CONTROL         "System",IDC_START_SYSTEM,"Button",BS_AUTORADIOBUTTON,
+                    132,126,57,11
+    CONTROL         "Automatic",IDC_START_AUTO,"Button",BS_AUTORADIOBUTTON,
+                    132,142,57,11
+    CONTROL         "Manual",IDC_START_MANUAL,"Button",BS_AUTORADIOBUTTON,
+                    132,158,57,11
+    CONTROL         "Disabled",IDC_START_DISABLED,"Button",
+                    BS_AUTORADIOBUTTON,132,174,57,11
+    CONTROL         "Ignore",IDC_ERRORS_IGNORE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,209,110,39,12
+    CONTROL         "Normal",IDC_ERRORS_NORMAL,"Button",BS_AUTORADIOBUTTON,
+                    209,131,39,12
+    CONTROL         "Severe",IDC_ERRORS_SEVERE,"Button",BS_AUTORADIOBUTTON,
+                    209,152,39,12
+    CONTROL         "Critical",IDC_ERRORS_CRITICAL,"Button",
+                    BS_AUTORADIOBUTTON,209,173,39,12
+    EDITTEXT        IDC_ACCOUNT,271,118,108,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,271,145,108,14,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_CONFIRM_PASSWORD,271,173,108,14,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Install or Update",IDOK,7,206,114,17
+    PUSHBUTTON      "Cancel",IDCANCEL,270,206,114,17
+    LTEXT           "Service Name:",IDC_STATIC,7,7,140,10
+    LTEXT           "Display Name",IDC_STATIC,7,36,82,9
+    GROUPBOX        "Service Type",IDC_STATIC,7,96,113,98
+    GROUPBOX        "Startup",IDC_STATIC,126,96,72,97
+    GROUPBOX        "Error Control",IDC_STATIC,204,96,56,98
+    LTEXT           "Path to the executable file:",IDC_STATIC,7,65,93,9
+    LTEXT           "Group:",IDC_STATIC,193,7,82,9
+    LTEXT           "Depends on:",IDC_STATIC,193,36,153,9
+    GROUPBOX        "Account/Driver Object",IDC_STATIC,266,96,118,97
+    LTEXT           "User or Driver Object Name:",IDC_STATIC,271,109,96,9
+    LTEXT           "Password:",IDC_STATIC,272,136,96,9
+    LTEXT           "Confirm Password:",IDC_STATIC,272,164,96,9
+END
+
+IDD_ABOUT_BOX DIALOG DISCARDABLE  0, 0, 184, 57
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Service Control Manager"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,18,20
+    LTEXT           "Windows NT Service Control Manager\nIvan Krivyakov (IVK) - ivan@cmt.co.il\n\nVersion 1.01\nApril 17, 1999",
+                    IDC_STATIC,39,9,137,41
+    DEFPUSHBUTTON   "OK",IDOK,126,36,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_COLUMNS_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 223
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 153
+    END
+
+    IDD_COMPUTER_NAME_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 52
+    END
+
+    IDD_CONFIG_SERVICE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 384
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+
+    IDD_ABOUT_BOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      IDC_REFRESH
+    SEPARATOR
+    BUTTON      IDC_SERVICE_START
+    BUTTON      IDC_SERVICE_STOP
+    BUTTON      IDC_SERVICE_PAUSE
+    BUTTON      IDC_SERVICE_CONTINUE
+    SEPARATOR
+    BUTTON      IDC_SELECT_COMPUTER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SERVICE_START       "Start\nStart"
+    IDC_SERVICE_STOP        "Stop\nStop"
+    IDC_SERVICE_PAUSE       "Pause\nPause"
+    IDC_SERVICE_CONTINUE    "Continue\nContinue"
+    IDC_REFRESH             "Refresh\nRefresh"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "Service Control Manager"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SELECT_COMPUTER     "Select computer\nSelect computer"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\ServiceControl.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
